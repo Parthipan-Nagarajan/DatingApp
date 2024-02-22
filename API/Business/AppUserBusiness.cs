@@ -2,11 +2,15 @@
 
 namespace API;
 
-public class AppUserBusiness
+public  static class AppUserBusiness
 {
-
-    public static void RegisterAppUserActions(WebApplication application)
+    public static void RegisterAppUserActions(this WebApplication application)
     {
-
+        application.MapGet("/userCustom", () =>
+        {
+            return "Data";
+        })
+        .WithName("GetCustomBusinessLogic")
+        .WithOpenApi();
     }
 }

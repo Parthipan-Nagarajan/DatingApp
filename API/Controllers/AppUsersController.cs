@@ -1,13 +1,14 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using API.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace API;
 
-[ApiController]
-[Route("api/[controller]")]
-public class AppUsersController : ControllerBase
+[Authorize]
+public class AppUsersController : BaseApiController
 {
     private readonly DataContext _dbcontext;
     public AppUsersController(DataContext dbContext)
@@ -16,6 +17,7 @@ public class AppUsersController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IEnumerable<AppUser>> GetUsers()
     {
         var Users = await _dbcontext.AppUsers.ToListAsync();
