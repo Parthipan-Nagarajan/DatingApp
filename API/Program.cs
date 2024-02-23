@@ -20,6 +20,16 @@ builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "SampleCors",
+                      policy  =>
+                      {
+                          policy.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                      });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,9 +41,7 @@ if (app.Environment.IsDevelopment())
 
 app.RegisterAppUserActions();
 
-app.UseCors(builder => builder.AllowAnyHeader()
-.AllowAnyMethod()
-.WithOrigins("http://localhost:4200/"));
+app.UseCors("SampleCors");
 
 
 app.UseAuthentication();
