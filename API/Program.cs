@@ -1,12 +1,6 @@
-using System.Text;
 using API;
 using API.Extensions;
-using API.Interfaces;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "SampleCors",
@@ -31,6 +26,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+app.UseCors("SampleCors");
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -41,7 +38,6 @@ if (app.Environment.IsDevelopment())
 
 app.RegisterAppUserActions();
 
-app.UseCors("SampleCors");
 
 
 app.UseAuthentication();

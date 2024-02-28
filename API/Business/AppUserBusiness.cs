@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace API;
+﻿namespace API;
 
 public  static class AppUserBusiness
 {

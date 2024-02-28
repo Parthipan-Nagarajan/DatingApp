@@ -1,17 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.DTO
 {
     public class RegisterDto
     {
-        [Required]
-        public string username {get;set;}
+        public RegisterDto(string username, string password)
+        {
+            this.username = username;
+            this.password = password;
+        }
 
         [Required]
-        public string password {get;set;}
+        public string username { get; set; }
+
+        [Required]
+        [StringLength(8, MinimumLength = 4)]
+        public string password { get; set; }
     }
 }

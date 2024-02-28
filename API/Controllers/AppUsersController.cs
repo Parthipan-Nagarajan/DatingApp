@@ -1,9 +1,7 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using API.Controllers;
+﻿using API.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace API;
 

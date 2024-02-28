@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using API.DTO;
 using API.Interfaces;
-using API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -68,9 +63,13 @@ namespace API.Controllers
                         username = dbuser.UserName
                     } ;
                 }
+                else
+                {
+                    return Unauthorized("Invalid Password");
+                }
             }
 
-            return BadRequest("Login Failed");
+            return Unauthorized("Invalid Username or Password");
         }
 
         private async Task<bool> UserExists(string username)
