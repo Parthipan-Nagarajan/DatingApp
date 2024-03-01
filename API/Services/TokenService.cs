@@ -11,7 +11,9 @@ namespace API.Services
         private readonly SymmetricSecurityKey _key;
         public TokenService(IConfiguration config)
         {
+#pragma warning disable CS8604 // Possible null reference argument.
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+#pragma warning restore CS8604 // Possible null reference argument.
         }
 
         public string CreateToken(AppUser user)

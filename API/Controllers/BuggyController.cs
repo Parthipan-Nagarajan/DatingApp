@@ -31,7 +31,9 @@ namespace API.Controllers
         public ActionResult<string> GetServerError()
         {
             AppUser usr = null;
+#pragma warning disable CS8604 // Possible null reference argument.
             return usr.ToString();
+#pragma warning restore CS8604 // Possible null reference argument.
         }
 
         [HttpGet("bad-request")]

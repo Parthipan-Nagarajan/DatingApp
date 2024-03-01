@@ -1,4 +1,7 @@
 ﻿using API.Controllers;
+using API.DTO;
+using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,41 +11,23 @@ namespace API;
 [Authorize]
 public class AppUsersController : BaseApiController
 {
-    private readonly DataContext _dbcontext;
-    public AppUsersController(DataContext dbContext)
+    private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
+    public AppUsersController(IUserRepository userRepository,IMapper mapper)
     {
-        _dbcontext = dbContext;
+        _userRepository = userRepository;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    [AllowAnonymous]
-    public async Task<IEnumerable<AppUser>> GetUsers()
+    public async Task<IEnumerable<MemberDto>> GetUsers()
     {
-        var Users = await _dbcontext.AppUsers.ToListAsync();
-
-        return Users;
+        return await _userRepository.GetMembersAsync();
     }
 
-    [HttpGet("{id}")]
-    public async Task<AppUser> GetUserById(int id)
+    [HttpGet("{username}")]
+    public async Task<MemberDto> GetUser(string username)
     {
-        var user = await _dbcontext.AppUsers.Where(a => a.Id == id).FirstOrDefaultAsync();
-        return user;
+        return await _userRepository.GetMemberAsync(username);
     }
-
-    [HttpPost]
-    public async Task<AppUser> CreateUser(AppUser appUser)
-    {
-        await _dbcontext.AppUsers.AddAsync(appUser);
-        return appUser;
-    }
-
-     [HttpPut]
-    public async Task<AppUser> UpdateUser(int id,AppUser appUser)
-    {
-        var dbAppUser = _dbcontext.AppUsers.Where(a => a.Id == id).FirstOrDefault();
-        
-        return appUser;
-    }
-
 }

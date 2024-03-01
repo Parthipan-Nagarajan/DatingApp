@@ -40,6 +40,7 @@ namespace API.Extensions
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(option =>
             {
+#pragma warning disable CS8604 // Possible null reference argument.
                 option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -47,6 +48,7 @@ namespace API.Extensions
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+#pragma warning restore CS8604 // Possible null reference argument.
             });
 
             return services;
