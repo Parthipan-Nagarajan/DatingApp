@@ -7,6 +7,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { jwtInjectInterceptor } from './_interceptors/jwt-inject.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
@@ -14,6 +15,7 @@ export const appConfig: ApplicationConfig = {
   provideClientHydration(),
   provideAnimations(),
   provideHttpClient(
+    withInterceptors([jwtInjectInterceptor]),
     withInterceptorsFromDi()
   ), provideToastr({
     timeOut: 3000,

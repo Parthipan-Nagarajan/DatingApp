@@ -13,7 +13,6 @@ export const authGuard: CanActivateFn = (route, state) => {
         return true;
       }
       else {
-        toastr.error('you are not logged in still !');
         return false;
       }
     }));

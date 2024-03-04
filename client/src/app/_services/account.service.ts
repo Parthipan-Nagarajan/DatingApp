@@ -2,12 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../_models/user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl: String = "http://localhost:5001/api/";
+  
+  baseUrl: string = environment.apiUrl;
 
   private currentUserSource = new BehaviorSubject<User | null>(null);
 
@@ -20,10 +22,10 @@ export class AccountService {
   login(model: any) {
     return this.http.post<User>(this.baseUrl + "Account/login", model).pipe(
       map((response: User) => {
-        const user = response;        
+        const user = response;
         if (user) {
           this.currentUserSource.next(user);
-          localStorage.setItem('user', JSON.stringify(user));          
+          localStorage.setItem('user', JSON.stringify(user));
         }
       })
     );
@@ -35,7 +37,7 @@ export class AccountService {
         const user = response;
         if (user) {
           this.currentUserSource.next(user);
-          localStorage.setItem('user', JSON.stringify(user));          
+          localStorage.setItem('user', JSON.stringify(user));
         }
 
         return user;
