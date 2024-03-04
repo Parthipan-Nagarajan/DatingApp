@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptor
 import { provideToastr } from 'ngx-toastr';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { jwtInjectInterceptor } from './_interceptors/jwt-inject.interceptor';
+import { ajaxHandlerInterceptor } from './_interceptors/ajax-handler.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
@@ -15,7 +16,7 @@ export const appConfig: ApplicationConfig = {
   provideClientHydration(),
   provideAnimations(),
   provideHttpClient(
-    withInterceptors([jwtInjectInterceptor]),
+    withInterceptors([jwtInjectInterceptor,ajaxHandlerInterceptor]),
     withInterceptorsFromDi()
   ), provideToastr({
     timeOut: 3000,

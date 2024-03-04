@@ -5,6 +5,7 @@ import { response } from 'express';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +20,7 @@ export class NavComponent implements OnInit, OnChanges, OnDestroy {
 
   strName: string = "";
 
-  constructor(public accountService: AccountService,private router:Router,private toastr:ToastrService) {
+  constructor(public accountService: AccountService,private router:Router,private toastr:ToastrService,private spinner:NgxSpinnerService) {
     console.log("Nav Component Constructor called " + this.strName);
     this.strName = " Assigned In Constructor";
   }
@@ -39,6 +40,7 @@ export class NavComponent implements OnInit, OnChanges, OnDestroy {
   login() {
     console.log('Nav Component login Called' + this.strName);
     console.log(this.model);
+    this.spinner.show();
     this.accountService.login(this.model).subscribe({
       next: response => {       
         this.currentUser$ = this.accountService.currentUser$;

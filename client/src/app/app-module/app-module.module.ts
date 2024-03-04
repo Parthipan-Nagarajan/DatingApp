@@ -15,6 +15,7 @@ import { ErrorHandlerComponent } from '../errors/error-handler.component';
 import { NotFoundComponent } from '../errors/not-found/not-found.component';
 import { ServerErrorComponent } from '../errors/server-error/server-error.component';
 import { MemberCardComponent } from '../members/member-card/member-card.component';
+import { MemberEditComponent } from '../members/member-edit/member-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MemberCardComponent } from '../members/member-card/member-card.componen
     MemberListComponent, 
     ErrorHandlerComponent,
     MemberCardComponent,
+    MemberEditComponent,
     NotFoundComponent,
     ServerErrorComponent
   ],
@@ -43,6 +45,7 @@ import { MemberCardComponent } from '../members/member-card/member-card.componen
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,
+    MemberEditComponent,
     RouterModule,
     ToastrModule
   ]
