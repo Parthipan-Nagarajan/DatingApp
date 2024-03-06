@@ -51,7 +51,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponseDto>?> Login(LoginDto loginDto)
         {
-            var dbuser =await _dbcontext.AppUsers.FirstOrDefaultAsync(a => a.UserName == loginDto.username);
+            var dbuser =await _dbcontext.AppUsers.Include(p => p.Photos).FirstOrDefaultAsync(a => a.UserName == loginDto.username);
             if (dbuser != null)
             {
                 using var hmac = new HMACSHA512(dbuser.PasswordSalt);
@@ -60,7 +60,8 @@ namespace API.Controllers
                     return new LoginResponseDto
                     {
                         token = _tokenService.CreateToken(dbuser),
-                        username = dbuser.UserName
+                        username = dbuser.UserName,
+                        photoUrl = dbuser.Photos.FirstOrDefault(a => a.IsMain)?.Url
                     } ;
                 }
                 else

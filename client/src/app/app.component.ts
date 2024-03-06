@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { AppModuleModule } from './app-module/app-module.module';
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   title: string = 'Dating Application';
   users: any;
   constructor(private accountService: AccountService) {
-    console.log("App Component Constructor Called");
+    
   }
   ngOnInit(): void {
     console.log("App Component Ng Init Called");
