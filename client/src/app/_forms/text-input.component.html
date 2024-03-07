@@ -1,0 +1,7 @@
+<div class="mb-3">
+    <input type="{{type}}" autocomplete="off" [class.is-invalid]="control.invalid && control.touched" class="form-control" [formControl] ="control" placeholder="{{label}}">
+    <div class="invalid-feedback" *ngIf="control.errors?.['required']" >Please enter valid {{label}}</div>
+    <div class="invalid-feedback" *ngIf="control.errors?.['minlength']" >{{label}} must be atleast {{control.errors?.['minlength'].requiredLength}} char</div>
+    <div class="invalid-feedback" *ngIf="control.errors?.['maxlength']" >{{label}} must be no more then {{control.errors?.['maxlength'].requiredLength}} char</div>
+    <div class="invalid-feedback" *ngIf="control.errors?.['notmatching']" >{{label}} are not matching</div>
+</div>

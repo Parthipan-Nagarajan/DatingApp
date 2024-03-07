@@ -22,10 +22,8 @@ export class AccountService {
   login(model: any) {
     return this.http.post<User>(this.baseUrl + "Account/login", model).pipe(
       map((response: User) => {
-        const user = response;
-        if (user) {
-          this.currentUserSource.next(user);
-          localStorage.setItem('user', JSON.stringify(user));
+        if (response) {
+          this.setCurrentUser(response);   
         }
       })
     );
@@ -34,17 +32,16 @@ export class AccountService {
   register(model: any) {
     return this.http.post<User>(this.baseUrl + "Account/register", model).pipe(
       map((response: User) => {
-        const user = response;
-        if (user) {
-          this.setCurrentUser(user);         
+        if (response) {
+          this.setCurrentUser(response);         
         }
-
-        return user;
+        return response;
       })
     );
   }
 
   setCurrentUser(user: User) {
+    console.log(user);
     this.currentUserSource.next(user);
     localStorage.setItem('user', JSON.stringify(user));
   }

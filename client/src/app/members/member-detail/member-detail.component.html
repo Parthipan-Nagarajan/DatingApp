@@ -3,7 +3,7 @@
 <div class="row" *ngIf="member">
     <div class="col-4">
         <div class="card">
-            <img src="{{member.photoUrl || './assers/user.png'}}" alt="{{member.knownAs}}" class="card-img-top img-thumbnail">
+            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top img-thumbnail">
             <div class="card-body">
                 <div>
                     <strong>Location :</strong>
@@ -44,7 +44,7 @@
                 <p>{{member.interests}}</p>
             </tab>
             <tab heading="Photos" #photoTab="tab">
-               <gallery *ngIf="photoTab.active" [items]="images"></gallery>
+               <gallery *ngIf="photoTab.active && images.length > 0" [items]="images"></gallery>
             </tab>
             <tab heading="Messages">
                 <p> All Messages will go here</p>

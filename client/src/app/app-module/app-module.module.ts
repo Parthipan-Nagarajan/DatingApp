@@ -17,6 +17,8 @@ import { ServerErrorComponent } from '../errors/server-error/server-error.compon
 import { MemberCardComponent } from '../members/member-card/member-card.component';
 import { MemberEditComponent } from '../members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from '../members/photo-editor/photo-editor.component';
+import { TextInputComponent } from '../_forms/text-input.component';
+import { DatePickerComponent } from '../_forms/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { PhotoEditorComponent } from '../members/photo-editor/photo-editor.compo
     MemberEditComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    TextInputComponent,
+    DatePickerComponent
   ],
   imports: [
     CommonModule,
@@ -49,6 +53,8 @@ import { PhotoEditorComponent } from '../members/photo-editor/photo-editor.compo
     MemberCardComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    TextInputComponent,
+    DatePickerComponent,
     RouterModule,
     ToastrModule
   ]

@@ -4,7 +4,7 @@
     <div class="container">
         <a class="navbar-brand" routerLink="">Dating App</a>
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <ng-container *ngIf="currentUser$ | async">
+            <ng-container *ngIf="accountService.currentUser$ | async">
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/members" routerLinkActive="active" >Matches</a>
                 </li>
@@ -21,10 +21,11 @@
             </li>
         </ul>
        
-        <div class="dropdown" dropdown *ngIf="(currentUser$ | async) as user">
+        <div class="dropdown" dropdown *ngIf="(accountService.currentUser$ | async) as user">
+            
             <img src="{{user.photoUrl || './assets/user.png'}}" alt="User Photo">
             <a class="text-light text-decoration-none dropdown-toggle ms-2" id="dropdownMenuLink" dropdownToggle  data-toggle="dropdown">
-                Welcome {{user.username | titlecase}}
+                Welcome {{user.userName | titlecase}}
             </a>
 
             <div class="dropdown-menu" *dropdownMenu aria-labelledby="dropdownMenuLink">
@@ -34,7 +35,7 @@
         </div>
 
 
-        <form *ngIf="!(currentUser$ | async)" #loginForm="ngForm" class="d-flex" role="search" (ngSubmit)="login()"
+        <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" role="search" (ngSubmit)="login()"
             autocomplete="off">
             <input name="username" [(ngModel)]="model.username" autocomplete="off" class="form-control me-2" type="text"
                 placeholder="Username">

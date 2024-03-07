@@ -16,7 +16,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class NavComponent implements OnInit, OnChanges, OnDestroy {
 
   model: any = {};
-  currentUser$: Observable<User | null> = of(null);
 
   strName: string = "";
 
@@ -34,16 +33,13 @@ export class NavComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     console.log('Nav Component init Called' + this.strName);
     this.strName = " Assigned In On Init"
-    this.currentUser$ = this.accountService.currentUser$;
   }
 
   login() {
     console.log('Nav Component login Called' + this.strName);
-    console.log(this.model);
     this.spinner.show();
     this.accountService.login(this.model).subscribe({
-      next: response => {       
-        this.currentUser$ = this.accountService.currentUser$;
+      next: response => {
         this.router.navigateByUrl('/members');
       }
     })
